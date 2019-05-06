@@ -1,0 +1,192 @@
+﻿@using DnDApp
+@{
+    Layout = null;
+    var foo = new Foo();
+    foo.name = "Fuck stats, and networking class.";
+    Quest[] quests = QuestTracker.GetQuests();
+}
+
+<!DOCTYPE html>
+
+
+<html>
+<meta charset="UTF-8">
+<title>Quest Log</title>
+
+<!-- No idea what this code does -->
+<!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+<!--   Bootstrap is a html library for utilities (the folding buttons in this case)   -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Link to the Google fonts used -->
+<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    :root {
+        --hokkaidoBadlandsColor: #0D4E7E;
+        --hokkaidoColor: var(--hokkaidoBadlandsColor);
+        --fortHokkaidoColor: #0D4E7E;
+        --kisameColor: #008080;
+        --fireColor: #FF0000;
+        --monsterColor: #AA0000;
+        --itatchiColor: #BA131A;
+        --farronColor: #457031;
+        --farronHighlandsColor: #559634;
+        --deepFarronColor: #405436;
+        --curseColor: #800080;
+        --inuColor: #0000FF;
+        --kurugamiCastleColor: #AA0000;
+        --tatsuoColor: #AA0000;
+        --yamatoColor: #BC002D;
+        --painColor: #BA131A;
+        --villageOfRainColor: #628190;
+        --professorColor: #00E6E6;
+        --katsMuseumColor: #800080;
+        --kamoshidasColor: #e67e00;
+        --kabutosColor: #009699;
+        --crystalSageColor: #7f49aa;
+        --abyssWatchersColor: #84120b;
+    }
+
+    body:before {
+        content: "";
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -10;
+        background: url("/Resources/HokkaidoWallpaper.jpg") no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center top;
+        //margin: 8;
+    }
+
+    html, body {
+        font-family: Verdana,sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        /*background:url("/Resources/HokkaidoWallpaper.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right top;*/
+    }
+
+    @@font-face {
+        font-family: kust;
+        src: url(/Resources/kust.otf);
+    }
+
+    html, body, h1, h2, h3, h4, h5, h6 {
+        font: 10 80px 'kust', Helvetica, sans-serif;
+    }
+
+    .w3-sidebar {
+        z-index: 3;
+        margin-top: 10px width: 250px;
+        top: 43px;
+        bottom: 0;
+        height: inherit;
+    }
+
+    h3 {
+        font: 10 30px 'kust', Helvetica, sans-serif;
+    }
+
+    p, button, br, div {
+        font: 10 20px 'Oleo Script', Helvetica, sans-serif;
+    }
+</style>
+<body>
+    <style>
+        h1 {
+            text-indent: 2%;
+        }
+
+        h3 {
+            text-indent: 4%;
+        }
+
+        p {
+            text-indent: 6%;
+        }
+
+        div {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+    <style>
+        @@font-face {
+            font-family: kust;
+            src: url(/Resources/kust.otf);
+        }
+
+
+        html, body, h1, h2, h3, h4, h5, h6 {
+            font: 400 25px/1.3 'kust', Helvetica, sans-serif;
+        }
+
+        .w3-sidebar {
+            z-index: 3;
+            width: 250px;
+            top: 43px;
+            bottom: 0;
+            height: inherit;
+        }
+
+        h3 {
+            font: 400 25px/1.3 'kust', Helvetica, sans-serif;
+        }
+
+        p, button {
+            font: 400 20px/1.3 'Oleo Script', Helvetica, sans-serif;
+        }
+    </style>
+
+    <h1>Quest Log</h1>
+    <h1>Debug Mode</h1>
+
+    @for(int i = 0; i < quests.Length; i++)
+    {
+        Quest quest = quests[i];
+        <!--@quest.questName-->
+        <h1 style="color:#8B0000">@quest.visableName</h1>
+        <button style="line-height:5px;
+            text-indent:5%;
+            margin-left:4%;
+            background-color:#8B0000;
+             border-bottom-color:#7e3a02;
+            border-left-color:#7e3a02;
+            border-top-color:#7e3a02;
+            border-right-color:#7e3a02;"
+            type="button"
+            class="btn btn-info"
+            data-toggle="collapse"
+            data-target="#@quest.questName">
+            Show/Hide
+        </button>
+        <p>
+            <div id="@quest.questName" class="collapse">
+                @foreach(var phase in quest.phases)
+                {
+                    <h3 style="color:#8B0000">∗ @phase.phaseName ∗</h3>
+                    <p>@Html.Raw(phase.description.Replace("\n", "<p/><p>"))</p><br />
+                }
+            </div>
+        </p>
+    }
+
+
+    <p/>
+    <p/>
+    <br/>
+    <br/>
+    <br/>
+</body>

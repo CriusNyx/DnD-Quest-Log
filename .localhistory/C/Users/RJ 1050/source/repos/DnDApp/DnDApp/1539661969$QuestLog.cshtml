@@ -1,0 +1,16 @@
+﻿@using DnDApp
+@{
+    Layout = null;
+    var Header = File.ReadAllText("C:/YGOPRO/DnD/Web/pageCSSHeader.html");
+    var Footer = File.ReadAllText("C:/YGOPRO/DnD/Web/pageCSSFooter.html");
+    var foo = new Foo();
+    foo.name = "Fuck stats, and networking class.";
+}
+
+<!DOCTYPE html>
+
+@Html.Raw(Header)
+Hello
+<h1>@foo.name</h1>
+<text>@foo.text</text>
+@Html.Raw(Footer)
